@@ -106,14 +106,10 @@ public class ListaDupla<E> {
 		if(this.size == 0){
 			throw new RuntimeException("Erro ao remover objeto em lista vazia.");
 		}
-		int tam = this.size;
-		this.size--;
-		if(tam == 1){
-			E removido = this.ultimo.getObjeto();
-			this.ultimo = null;
-			this.primeiro = null;
-			return removido;
+		if(this.size == 1){
+			return this.removerInicio();
 		}
+		this.size--;
 		E removido = this.ultimo.getObjeto();
 		this.ultimo = this.ultimo.getAnterior();
 		this.ultimo.setProximo(null);
@@ -127,9 +123,9 @@ public class ListaDupla<E> {
 		if((pos < 0) || (pos >= size)){
 			throw new IndexOutOfBoundsException();
 		}
-		if(pos == 0){
+		if(pos == 0 || this.size == 1){
 			return this.removerInicio();
-		}
+		}		
 		if(pos == this.size - 1){			
 			return this.removerFim();
 		}
